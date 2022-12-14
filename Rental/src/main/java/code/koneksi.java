@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
  *
  * @author HP VICTUS 16
  */
-public class koneksi {
+public class Koneksi {
     private String dbuser = "root";
     private String dbpasswd = "";
     private Statement stmt = null;
     private Connection con = null;
     private ResultSet rs = null;
-    public koneksi() {
+    public Koneksi() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/rental", dbuser, dbpasswd);
