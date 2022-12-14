@@ -19,7 +19,7 @@ public class koneksi {
     public koneksi() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/parkir", dbuser, dbpasswd);
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/rental", dbuser, dbpasswd);
             stmt = (Statement) con.createStatement();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "" + e.getMessage(), "JDBC Driver Error ", JOptionPane.WARNING_MESSAGE); 
