@@ -52,6 +52,20 @@ public class Rental extends javax.swing.JFrame {
         batalPelangganButton = new javax.swing.JButton();
         pilihPelangganButton = new javax.swing.JButton();
         pilihPelangganField = new javax.swing.JTextField();
+        dataKendaraanPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        hapusKendaraanButton = new javax.swing.JButton();
+        jenisLabel = new javax.swing.JLabel();
+        jenisField = new javax.swing.JTextField();
+        hargaLabel = new javax.swing.JLabel();
+        stokLabel = new javax.swing.JLabel();
+        stokField = new javax.swing.JTextField();
+        simpanKendaraanButton = new javax.swing.JButton();
+        baruKendaraanButton = new javax.swing.JButton();
+        batalKendaraanButton = new javax.swing.JButton();
+        pilihKendaraanButton = new javax.swing.JButton();
+        pilihKendaraanField = new javax.swing.JTextField();
+        hargaField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -273,6 +287,128 @@ public class Rental extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Data Pelanggan", dataPelangganPanel);
 
+        hapusKendaraanButton.setText("Hapus");
+        hapusKendaraanButton.setEnabled(false);
+        hapusKendaraanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusKendaraanButtonActionPerformed(evt);
+            }
+        });
+
+        jenisLabel.setText("Jenis:");
+
+        hargaLabel.setText("Harga:");
+
+        stokLabel.setText("Stok:");
+
+        simpanKendaraanButton.setText("Simpan");
+        simpanKendaraanButton.setEnabled(false);
+        simpanKendaraanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanKendaraanButtonActionPerformed(evt);
+            }
+        });
+
+        baruKendaraanButton.setText("Baru");
+        baruKendaraanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                baruKendaraanButtonActionPerformed(evt);
+            }
+        });
+
+        batalKendaraanButton.setText("Batal");
+        batalKendaraanButton.setEnabled(false);
+        batalKendaraanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalKendaraanButtonActionPerformed(evt);
+            }
+        });
+
+        pilihKendaraanButton.setText("Pilih (ID)");
+        pilihKendaraanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pilihKendaraanButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(baruKendaraanButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(simpanKendaraanButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hapusKendaraanButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addComponent(batalKendaraanButton))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hargaLabel)
+                            .addComponent(jenisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stokLabel))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hargaField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(stokField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jenisField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(pilihKendaraanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pilihKendaraanField)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jenisLabel)
+                    .addComponent(jenisField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hargaLabel)
+                    .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stokLabel)
+                    .addComponent(stokField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(simpanKendaraanButton)
+                    .addComponent(baruKendaraanButton)
+                    .addComponent(batalKendaraanButton)
+                    .addComponent(hapusKendaraanButton))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pilihKendaraanButton)
+                    .addComponent(pilihKendaraanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89))
+        );
+
+        javax.swing.GroupLayout dataKendaraanPanelLayout = new javax.swing.GroupLayout(dataKendaraanPanel);
+        dataKendaraanPanel.setLayout(dataKendaraanPanelLayout);
+        dataKendaraanPanelLayout.setHorizontalGroup(
+            dataKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataKendaraanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        dataKendaraanPanelLayout.setVerticalGroup(
+            dataKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataKendaraanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Data Kendaraan", dataKendaraanPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -417,6 +553,107 @@ public class Rental extends javax.swing.JFrame {
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_keluarButtonActionPerformed
+
+    private void hapusKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusKendaraanButtonActionPerformed
+        String query = pilihKendaraanField.getText();
+        try {
+            Koneksi conn = new Koneksi();
+            conn.query("DELETE FROM kendaraan WHERE kendaraan_id = '" + query + "'");
+        } catch (Exception e){}
+        jenisField.setText("");
+        jenisField.setEnabled(false);
+        hargaField.setText("");
+        hargaField.setEnabled(false);
+        stokField.setText("");
+        stokField.setEnabled(false);
+        simpanKendaraanButton.setEnabled(false);
+        hapusKendaraanButton.setEnabled(false);
+        batalKendaraanButton.setEnabled(false);
+        baruKendaraanButton.setEnabled(true);
+        pilihKendaraanButton.setEnabled(true);
+        pilihKendaraanField.setText("");
+        pilihKendaraanField.setEnabled(true);
+    }//GEN-LAST:event_hapusKendaraanButtonActionPerformed
+
+    private void simpanKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanKendaraanButtonActionPerformed
+        try {
+            Koneksi conn = new Koneksi();
+            if (pilihKendaraanField.getText().equals("")){
+                conn.query("INSERT INTO kendaraan (jenis, harga, stok) VALUES ('"+jenisField.getText()+"','"+hargaField.getText()+"','"+stokField.getText()+"')");
+            } else{
+                conn.query("UPDATE kendaraan SET jenis='"+jenisField.getText()+"', harga='"+hargaField.getText()+"', stok='"+stokField.getText()+"' WHERE kendaraan_id='"+pilihKendaraanField.getText()+"'");
+            }
+        } catch (Exception e){}
+        jenisField.setText("");
+        jenisField.setEnabled(false);
+        hargaField.setText("");
+        hargaField.setEnabled(false);
+        stokField.setText("");
+        stokField.setEnabled(false);
+        simpanKendaraanButton.setEnabled(false);
+        hapusKendaraanButton.setEnabled(false);
+        batalKendaraanButton.setEnabled(false);
+        baruKendaraanButton.setEnabled(true);
+        pilihKendaraanButton.setEnabled(true);
+        pilihKendaraanField.setText("");
+        pilihKendaraanField.setEnabled(true);
+    }//GEN-LAST:event_simpanKendaraanButtonActionPerformed
+
+    private void baruKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruKendaraanButtonActionPerformed
+        jenisField.setEnabled(true);
+        hargaField.setEnabled(true);
+        stokField.setEnabled(true);
+        simpanKendaraanButton.setEnabled(true);
+        batalKendaraanButton.setEnabled(true);
+        baruKendaraanButton.setEnabled(false);
+        pilihKendaraanButton.setEnabled(false);
+        pilihKendaraanField.setText("");
+        pilihKendaraanField.setEnabled(false);
+    }//GEN-LAST:event_baruKendaraanButtonActionPerformed
+
+    private void batalKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalKendaraanButtonActionPerformed
+        jenisField.setText("");
+        jenisField.setEnabled(false);
+        hargaField.setText("");
+        hargaField.setEnabled(false);
+        stokField.setText("");
+        stokField.setEnabled(false);
+        simpanKendaraanButton.setEnabled(false);
+        hapusKendaraanButton.setEnabled(false);
+        batalKendaraanButton.setEnabled(false);
+        baruKendaraanButton.setEnabled(true);
+        pilihKendaraanButton.setEnabled(true);
+        pilihKendaraanField.setEnabled(true);
+    }//GEN-LAST:event_batalKendaraanButtonActionPerformed
+
+    private void pilihKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihKendaraanButtonActionPerformed
+        if (cekKendaraan(pilihKendaraanField.getText())){
+            String id = pilihKendaraanField.getText();
+            ResultSet rs = null;
+            try{
+                Koneksi conn = new Koneksi();
+                rs = conn.getData("SELECT * FROM kendaraan WHERE kendaraan_id='"+id+"'");
+                
+                while (rs.next()){
+                    jenisField.setText(rs.getString("jenis"));
+                    hargaField.setText(rs.getString("harga"));
+                    stokField.setText(rs.getString("stok"));
+                    rs.close();
+                }
+            } catch (SQLException e) {}
+            jenisField.setEnabled(true);
+            hargaField.setEnabled(true);
+            stokField.setEnabled(true);
+            simpanKendaraanButton.setEnabled(true);
+            hapusKendaraanButton.setEnabled(true);
+            batalKendaraanButton.setEnabled(true);
+            baruKendaraanButton.setEnabled(false);
+            pilihKendaraanButton.setEnabled(false);
+            pilihKendaraanField.setEnabled(false);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "ID tidak ditemukan");
+        }
+    }//GEN-LAST:event_pilihKendaraanButtonActionPerformed
    
     private boolean cekPelanggan(String id){
         try {
@@ -424,6 +661,20 @@ public class Rental extends javax.swing.JFrame {
             ResultSet rs = null;
             rs = conn.getData("SELECT * FROM pelanggan WHERE pelanggan_id='"+id+"'");
             if (rs.next()){
+                rs.close();
+                return true;
+            }
+        } catch (SQLException e) {}
+        return false;
+    }
+
+    private boolean cekKendaraan(String id){
+        try {
+            Koneksi conn = new Koneksi();
+            ResultSet rs = null;
+            rs = conn.getData("SELECT * FROM kendaraan WHERE kendaraan_id='"+id+"'");
+            if (rs.next()){
+                rs.close();
                 return true;
             }
         } catch (SQLException e) {}
@@ -493,26 +744,40 @@ public class Rental extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel alamatLabel;
     private javax.swing.JTextArea alamatTextArea;
+    private javax.swing.JButton baruKendaraanButton;
     private javax.swing.JButton baruPelangganButton;
+    private javax.swing.JButton batalKendaraanButton;
     private javax.swing.JButton batalPelangganButton;
     private javax.swing.JButton cariPelangganButton;
     private javax.swing.JTextField cariPelangganField;
     private javax.swing.JTextField cpField;
     private javax.swing.JLabel cpLabel;
+    private javax.swing.JPanel dataKendaraanPanel;
     private javax.swing.JPanel dataPelangganPanel;
+    private javax.swing.JButton hapusKendaraanButton;
     private javax.swing.JButton hapusPelangganButton;
+    private javax.swing.JTextField hargaField;
+    private javax.swing.JLabel hargaLabel;
     private javax.swing.JPanel homePanel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jenisField;
+    private javax.swing.JLabel jenisLabel;
     private javax.swing.JButton keluarButton;
     private javax.swing.JTextField namaPelangganField;
     private javax.swing.JLabel namaPelangganLabel;
+    private javax.swing.JButton pilihKendaraanButton;
+    private javax.swing.JTextField pilihKendaraanField;
     private javax.swing.JButton pilihPelangganButton;
     private javax.swing.JTextField pilihPelangganField;
+    private javax.swing.JButton simpanKendaraanButton;
     private javax.swing.JButton simpanPelangganButton;
+    private javax.swing.JTextField stokField;
+    private javax.swing.JLabel stokLabel;
     private javax.swing.JTable testTable;
     // End of variables declaration//GEN-END:variables
 }
