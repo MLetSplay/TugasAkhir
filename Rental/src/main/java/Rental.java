@@ -4,7 +4,10 @@
  */
 import java.sql.*;
 import code.Koneksi;
-import javax.swing.table.DefaultTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -35,7 +38,7 @@ public class Rental extends javax.swing.JFrame {
         keluarButton = new javax.swing.JButton();
         dataPelangganPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        testTable = new javax.swing.JTable();
+        pelangganTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         cariPelangganButton = new javax.swing.JButton();
         cariPelangganField = new javax.swing.JTextField();
@@ -66,6 +69,29 @@ public class Rental extends javax.swing.JFrame {
         pilihKendaraanButton = new javax.swing.JButton();
         pilihKendaraanField = new javax.swing.JTextField();
         hargaField = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        kendaraanTable = new javax.swing.JTable();
+        peminjamanPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        idPelangganPeminjamanLabel = new javax.swing.JLabel();
+        idPelangganPeminjamanField = new javax.swing.JTextField();
+        jenisPeminjamanLabel = new javax.swing.JLabel();
+        jenisPeminjamanComboBox = new javax.swing.JComboBox<>();
+        tanggalPesanLabel = new javax.swing.JLabel();
+        tanggalPesanPeminjamanField = new javax.swing.JFormattedTextField();
+        lamaPeminjamanLabel = new javax.swing.JLabel();
+        lamaPeminjamanField = new javax.swing.JTextField();
+        prosesButton = new javax.swing.JButton();
+        biayaPeminjamanLabel = new javax.swing.JLabel();
+        biayaPeminjamanField = new javax.swing.JTextField();
+        totalPeminjamanLabel = new javax.swing.JLabel();
+        totalPeminjamanField = new javax.swing.JTextField();
+        lamaHariPeminjamanLabel = new javax.swing.JLabel();
+        biayaPerHariPeminjamanLabel = new javax.swing.JLabel();
+        tanggalPesanLabel1 = new javax.swing.JLabel();
+        tanggalKembaliPeminjamanField = new javax.swing.JFormattedTextField();
+        simpanPeminjamanButton = new javax.swing.JButton();
+        batalPeminjamanButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +127,7 @@ public class Rental extends javax.swing.JFrame {
             }
         });
 
-        testTable.setModel(new javax.swing.table.DefaultTableModel(
+        pelangganTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -133,10 +159,10 @@ public class Rental extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        testTable.setToolTipText("");
-        jScrollPane1.setViewportView(testTable);
-        if (testTable.getColumnModel().getColumnCount() > 0) {
-            testTable.getColumnModel().getColumn(0).setPreferredWidth(15);
+        pelangganTable.setToolTipText("");
+        jScrollPane1.setViewportView(pelangganTable);
+        if (pelangganTable.getColumnModel().getColumnCount() > 0) {
+            pelangganTable.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
 
         cariPelangganButton.setText("Cari (Nama)");
@@ -287,6 +313,12 @@ public class Rental extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Data Pelanggan", dataPelangganPanel);
 
+        dataKendaraanPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                dataKendaraanPanelComponentShown(evt);
+            }
+        });
+
         hapusKendaraanButton.setText("Hapus");
         hapusKendaraanButton.setEnabled(false);
         hapusKendaraanButton.addActionListener(new java.awt.event.ActionListener() {
@@ -297,9 +329,13 @@ public class Rental extends javax.swing.JFrame {
 
         jenisLabel.setText("Jenis:");
 
+        jenisField.setEnabled(false);
+
         hargaLabel.setText("Harga:");
 
         stokLabel.setText("Stok:");
+
+        stokField.setEnabled(false);
 
         simpanKendaraanButton.setText("Simpan");
         simpanKendaraanButton.setEnabled(false);
@@ -330,6 +366,8 @@ public class Rental extends javax.swing.JFrame {
                 pilihKendaraanButtonActionPerformed(evt);
             }
         });
+
+        hargaField.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -370,10 +408,10 @@ public class Rental extends javax.swing.JFrame {
                     .addComponent(jenisLabel)
                     .addComponent(jenisField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hargaLabel)
                     .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stokLabel)
                     .addComponent(stokField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -387,8 +425,36 @@ public class Rental extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pilihKendaraanButton)
                     .addComponent(pilihKendaraanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(89, 89, 89))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        kendaraanTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Jenis", "Sewa", "Stok"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(kendaraanTable);
 
         javax.swing.GroupLayout dataKendaraanPanelLayout = new javax.swing.GroupLayout(dataKendaraanPanel);
         dataKendaraanPanel.setLayout(dataKendaraanPanelLayout);
@@ -396,18 +462,173 @@ public class Rental extends javax.swing.JFrame {
             dataKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataKendaraanPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(dataKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataKendaraanPanelLayout.setVerticalGroup(
             dataKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataKendaraanPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Data Kendaraan", dataKendaraanPanel);
+
+        peminjamanPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                peminjamanPanelComponentShown(evt);
+            }
+        });
+
+        idPelangganPeminjamanLabel.setText("ID Pelanggan:");
+
+        jenisPeminjamanLabel.setText("Jenis:");
+
+        tanggalPesanLabel.setText("Tanggal Pesan:");
+
+        tanggalPesanPeminjamanField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+
+        lamaPeminjamanLabel.setText("Lama Pinjam:");
+
+        prosesButton.setText("Proses");
+        prosesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prosesButtonActionPerformed(evt);
+            }
+        });
+
+        biayaPeminjamanLabel.setText("Biaya Sewa:");
+
+        biayaPeminjamanField.setEditable(false);
+
+        totalPeminjamanLabel.setText("Total Sewa:");
+
+        totalPeminjamanField.setEditable(false);
+
+        lamaHariPeminjamanLabel.setText("hari");
+
+        biayaPerHariPeminjamanLabel.setText("per hari");
+
+        tanggalPesanLabel1.setText("Tanggal Kembali:");
+
+        tanggalKembaliPeminjamanField.setEditable(false);
+        tanggalKembaliPeminjamanField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
+
+        simpanPeminjamanButton.setText("Simpan");
+        simpanPeminjamanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanPeminjamanButtonActionPerformed(evt);
+            }
+        });
+
+        batalPeminjamanButton.setText("Batal");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(tanggalPesanLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tanggalKembaliPeminjamanField))
+                            .addComponent(prosesButton)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jenisPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tanggalPesanLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                    .addComponent(lamaPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(biayaPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(totalPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(idPelangganPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(13, 13, 13)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lamaPeminjamanField)
+                                    .addComponent(jenisPeminjamanComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(idPelangganPeminjamanField)
+                                    .addComponent(tanggalPesanPeminjamanField)
+                                    .addComponent(biayaPeminjamanField)
+                                    .addComponent(totalPeminjamanField))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lamaHariPeminjamanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(biayaPerHariPeminjamanLabel))))
+                        .addContainerGap(151, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(simpanPeminjamanButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(batalPeminjamanButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idPelangganPeminjamanLabel)
+                    .addComponent(idPelangganPeminjamanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jenisPeminjamanLabel)
+                    .addComponent(jenisPeminjamanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tanggalPesanLabel)
+                    .addComponent(tanggalPesanPeminjamanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lamaPeminjamanLabel)
+                    .addComponent(lamaPeminjamanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lamaHariPeminjamanLabel))
+                .addGap(18, 18, 18)
+                .addComponent(prosesButton)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(biayaPeminjamanLabel)
+                    .addComponent(biayaPeminjamanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(biayaPerHariPeminjamanLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalPeminjamanLabel)
+                    .addComponent(totalPeminjamanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tanggalPesanLabel1)
+                    .addComponent(tanggalKembaliPeminjamanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(simpanPeminjamanButton)
+                    .addComponent(batalPeminjamanButton))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout peminjamanPanelLayout = new javax.swing.GroupLayout(peminjamanPanel);
+        peminjamanPanel.setLayout(peminjamanPanelLayout);
+        peminjamanPanelLayout.setHorizontalGroup(
+            peminjamanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(peminjamanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        peminjamanPanelLayout.setVerticalGroup(
+            peminjamanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(peminjamanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Peminjaman", peminjamanPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -460,12 +681,13 @@ public class Rental extends javax.swing.JFrame {
             rs = conn.getData("SELECT * FROM pelanggan WHERE nama LIKE '%" + query + "%'");
 
             while (rs.next()){
-                testTable.setValueAt(rs.getString("pelanggan_id"), baris, 0);
-                testTable.setValueAt(rs.getString("nama"), baris, 1);
-                testTable.setValueAt(rs.getString("alamat"), baris, 2);
-                testTable.setValueAt(rs.getString("cp"), baris, 3);
+                pelangganTable.setValueAt(rs.getString("pelanggan_id"), baris, 0);
+                pelangganTable.setValueAt(rs.getString("nama"), baris, 1);
+                pelangganTable.setValueAt(rs.getString("alamat"), baris, 2);
+                pelangganTable.setValueAt(rs.getString("cp"), baris, 3);
                 baris++;
             }
+            rs.close();
         } catch (SQLException e){}
     }//GEN-LAST:event_cariPelangganButtonActionPerformed
 
@@ -535,6 +757,7 @@ public class Rental extends javax.swing.JFrame {
                     alamatTextArea.setText(rs.getString("alamat"));
                     cpField.setText(rs.getString("cp"));
                 }
+                rs.close();
             } catch (SQLException e) {}
             namaPelangganField.setEnabled(true);
             alamatTextArea.setEnabled(true);
@@ -573,6 +796,8 @@ public class Rental extends javax.swing.JFrame {
         pilihKendaraanButton.setEnabled(true);
         pilihKendaraanField.setText("");
         pilihKendaraanField.setEnabled(true);
+        refreshKendaraan();
+        showKendaraan();
     }//GEN-LAST:event_hapusKendaraanButtonActionPerformed
 
     private void simpanKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanKendaraanButtonActionPerformed
@@ -597,6 +822,8 @@ public class Rental extends javax.swing.JFrame {
         pilihKendaraanButton.setEnabled(true);
         pilihKendaraanField.setText("");
         pilihKendaraanField.setEnabled(true);
+        refreshKendaraan();
+        showKendaraan();
     }//GEN-LAST:event_simpanKendaraanButtonActionPerformed
 
     private void baruKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruKendaraanButtonActionPerformed
@@ -654,6 +881,88 @@ public class Rental extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "ID tidak ditemukan");
         }
     }//GEN-LAST:event_pilihKendaraanButtonActionPerformed
+
+    private void peminjamanPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_peminjamanPanelComponentShown
+        try {
+            Koneksi conn = new Koneksi();
+            ResultSet rs = null;
+            rs = conn.getData("SELECT * FROM kendaraan");
+            
+            while(rs.next()) {
+                jenisPeminjamanComboBox.addItem(rs.getString("jenis"));
+            }
+            rs.close();
+        } catch(SQLException e) {}
+    }//GEN-LAST:event_peminjamanPanelComponentShown
+
+    private void prosesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prosesButtonActionPerformed
+        if (cekPelanggan(idPelangganPeminjamanField.getText())){
+            idPelangganPeminjamanField.setEnabled(false);
+            jenisPeminjamanComboBox.setEnabled(false);
+            tanggalPesanPeminjamanField.setEnabled(false);
+            lamaPeminjamanField.setEnabled(false);
+            int sewa = 0;
+            try {
+                Koneksi conn = new Koneksi();
+                ResultSet rs = null;
+                rs = conn.getData("SELECT * FROM kendaraan WHERE jenis='"+jenisPeminjamanComboBox.getSelectedItem()+"'");
+                rs.next();
+                biayaPeminjamanField.setText(rs.getString("harga"));            
+                sewa = Integer.parseInt(rs.getString("harga"));
+                rs.close();
+            } catch (SQLException e) {}
+            
+            int lama = Integer.parseInt(lamaPeminjamanField.getText());
+            totalPeminjamanField.setText(Integer.toString(lama*sewa));
+            
+            SimpleDateFormat formatWaktu = new SimpleDateFormat("dd/MM/yyyy");
+            Calendar cal = Calendar.getInstance();
+            try {
+                cal.setTime(formatWaktu.parse(tanggalPesanPeminjamanField.getText()));
+                cal.add(Calendar.DATE, lama);
+                String output = formatWaktu.format(cal.getTime());
+                tanggalKembaliPeminjamanField.setText(output);
+            } catch (ParseException e){}
+            
+            
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "ID tidak ditemukan");
+        }
+    }//GEN-LAST:event_prosesButtonActionPerformed
+
+    private void simpanPeminjamanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanPeminjamanButtonActionPerformed
+        try {
+            Koneksi conn = new Koneksi();
+            ResultSet rs = null;
+            rs = conn.getData("SELECT * FROM kendaraan WHERE jenis='"+jenisPeminjamanComboBox.getSelectedItem()+"'");
+            rs.next();
+            String kendaraan_id = rs.getString("kendaraan_id");         
+            rs.close();
+            
+            SimpleDateFormat formatWaktu = new SimpleDateFormat("yyyy-MM-DD");
+            String pesan = tanggalPesanPeminjamanField.getText();
+            String kembali = tanggalKembaliPeminjamanField.getText();
+
+            // Parse the date strings using the SimpleDateFormat object
+            Date tanggalPesan = formatWaktu.parse(pesan);
+            Date tanggalKembali = formatWaktu.parse(kembali);
+
+            // Format the parsed dates using the SimpleDateFormat object
+            String pesanFormatted = formatWaktu.format(tanggalPesan);
+            String kembaliFormatted = formatWaktu.format(tanggalKembali);
+
+            String query = "INSERT INTO transaksi (pelanggan_id, kendaraan_id, tanggal_pesan, tanggal_kembali, lama_pinjam, total) "
+                    + "VALUES ('"+idPelangganPeminjamanField.getText()+"','"+kendaraan_id+"','"+pesanFormatted
+                    + "','"+kembaliFormatted+"','"+lamaPeminjamanField.getText()+"','"+totalPeminjamanField.getText()+"')";
+            conn.query(query);
+        } catch (Exception e){
+            javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_simpanPeminjamanButtonActionPerformed
+
+    private void dataKendaraanPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dataKendaraanPanelComponentShown
+        showKendaraan();
+    }//GEN-LAST:event_dataKendaraanPanelComponentShown
    
     private boolean cekPelanggan(String id){
         try {
@@ -684,7 +993,7 @@ public class Rental extends javax.swing.JFrame {
     private void refreshPelanggan(){
         for (int i=0; i<10; i++){
             for (int j=0; j<4; j++){
-                testTable.setValueAt("", i, j);
+                pelangganTable.setValueAt("", i, j);
             }
         }
     }
@@ -697,12 +1006,39 @@ public class Rental extends javax.swing.JFrame {
             rs = conn.getData("SELECT * FROM pelanggan");
 
             while (rs.next()){
-                testTable.setValueAt(rs.getString("pelanggan_id"), baris, 0);
-                testTable.setValueAt(rs.getString("nama"), baris, 1);
-                testTable.setValueAt(rs.getString("alamat"), baris, 2);
-                testTable.setValueAt(rs.getString("cp"), baris, 3);
+                pelangganTable.setValueAt(rs.getString("pelanggan_id"), baris, 0);
+                pelangganTable.setValueAt(rs.getString("nama"), baris, 1);
+                pelangganTable.setValueAt(rs.getString("alamat"), baris, 2);
+                pelangganTable.setValueAt(rs.getString("cp"), baris, 3);
                 baris++;
             }
+            rs.close();
+        } catch (SQLException e){}
+    }
+    
+    private void refreshKendaraan(){
+        for (int i=0; i<10; i++){
+            for (int j=0; j<4; j++){
+                kendaraanTable.setValueAt("", i, j);
+            }
+        }
+    }
+    
+    private void showKendaraan(){
+        int baris = 0;
+        try {
+            Koneksi conn = new Koneksi();
+            ResultSet rs = null;
+            rs = conn.getData("SELECT * FROM kendaraan");
+
+            while (rs.next()){
+                pelangganTable.setValueAt(rs.getString("kendaraan_id"), baris, 0);
+                pelangganTable.setValueAt(rs.getString("jenis"), baris, 1);
+                pelangganTable.setValueAt(rs.getString("sewa"), baris, 2);
+                pelangganTable.setValueAt(rs.getString("stok"), baris, 3);
+                baris++;
+            }
+            rs.close();
         } catch (SQLException e){}
     }
     
@@ -748,6 +1084,10 @@ public class Rental extends javax.swing.JFrame {
     private javax.swing.JButton baruPelangganButton;
     private javax.swing.JButton batalKendaraanButton;
     private javax.swing.JButton batalPelangganButton;
+    private javax.swing.JButton batalPeminjamanButton;
+    private javax.swing.JTextField biayaPeminjamanField;
+    private javax.swing.JLabel biayaPeminjamanLabel;
+    private javax.swing.JLabel biayaPerHariPeminjamanLabel;
     private javax.swing.JButton cariPelangganButton;
     private javax.swing.JTextField cariPelangganField;
     private javax.swing.JTextField cpField;
@@ -759,25 +1099,44 @@ public class Rental extends javax.swing.JFrame {
     private javax.swing.JTextField hargaField;
     private javax.swing.JLabel hargaLabel;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JTextField idPelangganPeminjamanField;
+    private javax.swing.JLabel idPelangganPeminjamanLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jenisField;
     private javax.swing.JLabel jenisLabel;
+    private javax.swing.JComboBox<String> jenisPeminjamanComboBox;
+    private javax.swing.JLabel jenisPeminjamanLabel;
     private javax.swing.JButton keluarButton;
+    private javax.swing.JTable kendaraanTable;
+    private javax.swing.JLabel lamaHariPeminjamanLabel;
+    private javax.swing.JTextField lamaPeminjamanField;
+    private javax.swing.JLabel lamaPeminjamanLabel;
     private javax.swing.JTextField namaPelangganField;
     private javax.swing.JLabel namaPelangganLabel;
+    private javax.swing.JTable pelangganTable;
+    private javax.swing.JPanel peminjamanPanel;
     private javax.swing.JButton pilihKendaraanButton;
     private javax.swing.JTextField pilihKendaraanField;
     private javax.swing.JButton pilihPelangganButton;
     private javax.swing.JTextField pilihPelangganField;
+    private javax.swing.JButton prosesButton;
     private javax.swing.JButton simpanKendaraanButton;
     private javax.swing.JButton simpanPelangganButton;
+    private javax.swing.JButton simpanPeminjamanButton;
     private javax.swing.JTextField stokField;
     private javax.swing.JLabel stokLabel;
-    private javax.swing.JTable testTable;
+    private javax.swing.JFormattedTextField tanggalKembaliPeminjamanField;
+    private javax.swing.JLabel tanggalPesanLabel;
+    private javax.swing.JLabel tanggalPesanLabel1;
+    private javax.swing.JFormattedTextField tanggalPesanPeminjamanField;
+    private javax.swing.JTextField totalPeminjamanField;
+    private javax.swing.JLabel totalPeminjamanLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -126,7 +126,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="testTable">
+                <Component class="javax.swing.JTable" name="pelangganTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="10">
@@ -353,6 +353,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="dataKendaraanPanel">
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="dataKendaraanPanelComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Data Kendaraan">
@@ -364,9 +367,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -375,8 +381,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" min="-2" pref="264" max="-2" attributes="0"/>
-                      <EmptySpace pref="203" max="32767" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="261" max="-2" attributes="0"/>
+                      <EmptySpace pref="9" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -431,11 +439,11 @@
                               <Component id="jenisField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="hargaLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="hargaField" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="hargaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hargaField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="stokLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="stokField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -452,7 +460,7 @@
                               <Component id="pilihKendaraanButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="pilihKendaraanField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -473,6 +481,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jenisField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="hargaLabel">
                   <Properties>
@@ -485,6 +496,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="stokField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="simpanKendaraanButton">
                   <Properties>
@@ -523,6 +537,278 @@
                 <Component class="javax.swing.JTextField" name="pilihKendaraanField">
                 </Component>
                 <Component class="javax.swing.JTextField" name="hargaField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="kendaraanTable">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="4" rowCount="4">
+                        <Column editable="false" title="ID" type="java.lang.String"/>
+                        <Column editable="true" title="Jenis" type="java.lang.String"/>
+                        <Column editable="true" title="Sewa" type="java.lang.String"/>
+                        <Column editable="true" title="Stok" type="java.lang.String"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="peminjamanPanel">
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="peminjamanPanelComponentShown"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Peminjaman">
+                <Property name="tabTitle" type="java.lang.String" value="Peminjaman"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="130" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="tanggalPesanLabel1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="tanggalKembaliPeminjamanField" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="prosesButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jenisPeminjamanLabel" max="32767" attributes="0"/>
+                                              <Component id="tanggalPesanLabel" alignment="0" pref="93" max="32767" attributes="0"/>
+                                              <Component id="lamaPeminjamanLabel" max="32767" attributes="0"/>
+                                              <Component id="biayaPeminjamanLabel" max="32767" attributes="0"/>
+                                              <Component id="totalPeminjamanLabel" max="32767" attributes="0"/>
+                                              <Component id="idPelangganPeminjamanLabel" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lamaPeminjamanField" max="32767" attributes="0"/>
+                                              <Component id="jenisPeminjamanComboBox" max="32767" attributes="0"/>
+                                              <Component id="idPelangganPeminjamanField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="tanggalPesanPeminjamanField" max="32767" attributes="0"/>
+                                              <Component id="biayaPeminjamanField" max="32767" attributes="0"/>
+                                              <Component id="totalPeminjamanField" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lamaHariPeminjamanLabel" min="-2" pref="37" max="-2" attributes="0"/>
+                                              <Component id="biayaPerHariPeminjamanLabel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="151" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="simpanPeminjamanButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="batalPeminjamanButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="idPelangganPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="idPelangganPeminjamanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jenisPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jenisPeminjamanComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tanggalPesanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tanggalPesanPeminjamanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lamaPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lamaPeminjamanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lamaHariPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="prosesButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="biayaPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="biayaPeminjamanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="biayaPerHariPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="totalPeminjamanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="totalPeminjamanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tanggalPesanLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tanggalKembaliPeminjamanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="simpanPeminjamanButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="batalPeminjamanButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="idPelangganPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="ID Pelanggan:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="idPelangganPeminjamanField">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jenisPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Jenis:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jenisPeminjamanComboBox">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tanggalPesanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tanggal Pesan:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="tanggalPesanPeminjamanField">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="dd/MM/yyyy" subtype="-1" type="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lamaPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Lama Pinjam:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="lamaPeminjamanField">
+                </Component>
+                <Component class="javax.swing.JButton" name="prosesButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Proses"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prosesButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="biayaPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Biaya Sewa:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="biayaPeminjamanField">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="totalPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Total Sewa:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="totalPeminjamanField">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lamaHariPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="hari"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="biayaPerHariPeminjamanLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="per hari"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tanggalPesanLabel1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tanggal Kembali:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="tanggalKembaliPeminjamanField">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="" subtype="-1" type="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="simpanPeminjamanButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Simpan"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simpanPeminjamanButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="batalPeminjamanButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Batal"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
