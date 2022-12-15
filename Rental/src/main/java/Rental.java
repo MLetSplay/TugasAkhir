@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-import java.sql.*;
 import code.Koneksi;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.sql.*;
 
 /**
  *
@@ -36,6 +36,7 @@ public class Rental extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
         keluarButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         dataPelangganPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pelangganTable = new javax.swing.JTable();
@@ -98,6 +99,8 @@ public class Rental extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+
         keluarButton.setText("Keluar");
         keluarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,19 +108,28 @@ public class Rental extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Fira Code", 0, 36)); // NOI18N
+        jLabel1.setText("Selamat Datang");
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
-                .addContainerGap(322, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(keluarButton)
                 .addContainerGap())
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(47, 47, 47))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
-                .addContainerGap(442, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
                 .addComponent(keluarButton)
                 .addContainerGap())
         );
@@ -132,6 +144,21 @@ public class Rental extends javax.swing.JFrame {
 
         pelangganTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -168,6 +195,8 @@ public class Rental extends javax.swing.JFrame {
             pelangganTable.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         cariPelangganButton.setText("Cari (Nama)");
         cariPelangganButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,13 +214,18 @@ public class Rental extends javax.swing.JFrame {
 
         namaPelangganLabel.setText("Nama:");
 
+        namaPelangganField.setEnabled(false);
+
         alamatLabel.setText("Alamat:");
 
         alamatTextArea.setColumns(20);
         alamatTextArea.setRows(5);
+        alamatTextArea.setEnabled(false);
         jScrollPane2.setViewportView(alamatTextArea);
 
         cpLabel.setText("Contact Person:");
+
+        cpField.setEnabled(false);
 
         simpanPelangganButton.setText("Simpan");
         simpanPelangganButton.setEnabled(false);
@@ -248,17 +282,15 @@ public class Rental extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)
                             .addComponent(namaPelangganField)
                             .addComponent(cpField))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 36, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(pilihPelangganButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cariPelangganButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(cariPelangganField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pilihPelangganField, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pilihPelangganField)
+                            .addComponent(cariPelangganField))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -321,6 +353,8 @@ public class Rental extends javax.swing.JFrame {
                 dataKendaraanPanelComponentShown(evt);
             }
         });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         hapusKendaraanButton.setText("Hapus");
         hapusKendaraanButton.setEnabled(false);
@@ -436,6 +470,27 @@ public class Rental extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -477,7 +532,7 @@ public class Rental extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Data Kendaraan", dataKendaraanPanel);
@@ -487,6 +542,8 @@ public class Rental extends javax.swing.JFrame {
                 peminjamanPanelComponentShown(evt);
             }
         });
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         idPelangganPeminjamanLabel.setText("ID Pelanggan:");
 
@@ -520,9 +577,10 @@ public class Rental extends javax.swing.JFrame {
         tanggalPesanLabel1.setText("Tanggal Kembali:");
 
         tanggalKembaliPeminjamanField.setEditable(false);
-        tanggalKembaliPeminjamanField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
+        tanggalKembaliPeminjamanField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         simpanPeminjamanButton.setText("Simpan");
+        simpanPeminjamanButton.setEnabled(false);
         simpanPeminjamanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simpanPeminjamanButtonActionPerformed(evt);
@@ -530,6 +588,12 @@ public class Rental extends javax.swing.JFrame {
         });
 
         batalPeminjamanButton.setText("Batal");
+        batalPeminjamanButton.setEnabled(false);
+        batalPeminjamanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalPeminjamanButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -538,39 +602,37 @@ public class Rental extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(tanggalPesanLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tanggalKembaliPeminjamanField))
-                            .addComponent(prosesButton)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jenisPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tanggalPesanLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                    .addComponent(lamaPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(biayaPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(totalPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(idPelangganPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(13, 13, 13)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lamaPeminjamanField)
-                                    .addComponent(jenisPeminjamanComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(idPelangganPeminjamanField)
-                                    .addComponent(tanggalPesanPeminjamanField)
-                                    .addComponent(biayaPeminjamanField)
-                                    .addComponent(totalPeminjamanField))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lamaHariPeminjamanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(biayaPerHariPeminjamanLabel))))
-                        .addContainerGap(151, Short.MAX_VALUE))
+                    .addComponent(prosesButton)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(simpanPeminjamanButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(batalPeminjamanButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(batalPeminjamanButton))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tanggalPesanLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jenisPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tanggalPesanLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lamaPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(biayaPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(totalPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idPelangganPeminjamanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tanggalPesanPeminjamanField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jenisPeminjamanComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 84, Short.MAX_VALUE)
+                                .addComponent(idPelangganPeminjamanField, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tanggalKembaliPeminjamanField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                    .addComponent(lamaPeminjamanField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(biayaPeminjamanField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalPeminjamanField, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lamaHariPeminjamanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(biayaPerHariPeminjamanLabel))))))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,6 +706,27 @@ public class Rental extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
@@ -658,15 +741,15 @@ public class Rental extends javax.swing.JFrame {
             transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(transaksiPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addContainerGap())
         );
         transaksiPanelLayout.setVerticalGroup(
             transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(transaksiPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Transaksi", transaksiPanel);
@@ -675,11 +758,11 @@ public class Rental extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
         pack();
@@ -815,7 +898,9 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_pilihPelangganButtonActionPerformed
 
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
-        System.exit(0);
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_keluarButtonActionPerformed
 
     private void hapusKendaraanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusKendaraanButtonActionPerformed
@@ -924,6 +1009,8 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_pilihKendaraanButtonActionPerformed
 
     private void peminjamanPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_peminjamanPanelComponentShown
+        jenisPeminjamanComboBox.removeAllItems();
+        jenisPeminjamanComboBox.addItem("");
         try {
             Koneksi conn = new Koneksi();
             ResultSet rs = null;
@@ -956,16 +1043,17 @@ public class Rental extends javax.swing.JFrame {
             int lama = Integer.parseInt(lamaPeminjamanField.getText());
             totalPeminjamanField.setText(Integer.toString(lama*sewa));
             
-            SimpleDateFormat formatWaktu = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatTanggal = new SimpleDateFormat("dd/MM/yyyy");
             Calendar cal = Calendar.getInstance();
             try {
-                cal.setTime(formatWaktu.parse(tanggalPesanPeminjamanField.getText()));
+                cal.setTime(formatTanggal.parse(tanggalPesanPeminjamanField.getText()));
                 cal.add(Calendar.DATE, lama);
-                String output = formatWaktu.format(cal.getTime());
+                String output = formatTanggal.format(cal.getTime());
                 tanggalKembaliPeminjamanField.setText(output);
             } catch (ParseException e){}
             
-            
+            simpanPeminjamanButton.setEnabled(true);
+            batalPeminjamanButton.setEnabled(true);
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "ID tidak ditemukan");
         }
@@ -980,19 +1068,17 @@ public class Rental extends javax.swing.JFrame {
             String kendaraan_id = rs.getString("kendaraan_id");         
             rs.close();
             
-            SimpleDateFormat formatWaktu = new SimpleDateFormat("yyyy-MM-DD");
-            Calendar cal = Calendar.getInstance();
-            try {
-                cal.setTime(formatWaktu.parse(tanggalKembaliPeminjamanField.getText()));
-                String output = formatWaktu.format(cal.getTime());
-                tanggalKembaliPeminjamanField.setText(output);
-            } catch (ParseException e){}
+            String pesanFormatted = tanggalPesanPeminjamanField.getText();
+            String[] pesanSplit = pesanFormatted.split("/");
+            pesanFormatted = pesanSplit[2]+"-"+pesanSplit[1]+"-"+pesanSplit[0];
             String kembaliFormatted = tanggalKembaliPeminjamanField.getText();
             String[] kembaliSplit = kembaliFormatted.split("/");
             kembaliFormatted = kembaliSplit[2]+"-"+kembaliSplit[1]+"-"+kembaliSplit[0];
             String query = "INSERT INTO transaksi (pelanggan_id, kendaraan_id, tanggal_pesan, tanggal_kembali, lama_pinjam, total) "
-                    + "VALUES ('"+idPelangganPeminjamanField.getText()+"','"+kendaraan_id+"','"+ tanggalPesanPeminjamanField.getText()+"','"+kembaliFormatted+"','"+lamaPeminjamanField.getText()+"','"+totalPeminjamanField.getText()+"')";
+                    + "VALUES ('"+idPelangganPeminjamanField.getText()+"','"+kendaraan_id+"','"+pesanFormatted+"','"+kembaliFormatted+"','"+lamaPeminjamanField.getText()+"','"+totalPeminjamanField.getText()+"')";
             conn.query(query);
+            
+            bersihPeminjaman();
         } catch (Exception e){
             javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -1005,6 +1091,10 @@ public class Rental extends javax.swing.JFrame {
     private void transaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_transaksiPanelComponentShown
         showTransaksi();
     }//GEN-LAST:event_transaksiPanelComponentShown
+
+    private void batalPeminjamanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalPeminjamanButtonActionPerformed
+        bersihPeminjaman();
+    }//GEN-LAST:event_batalPeminjamanButtonActionPerformed
    
     private boolean cekPelanggan(String id){
         try {
@@ -1084,6 +1174,22 @@ public class Rental extends javax.swing.JFrame {
         } catch (SQLException e){}
     }
     
+    private void bersihPeminjaman(){
+        idPelangganPeminjamanField.setText("");
+        idPelangganPeminjamanField.setEnabled(true);
+        jenisPeminjamanComboBox.setSelectedItem("");
+        jenisPeminjamanComboBox.setEnabled(true);
+        tanggalPesanPeminjamanField.setText("");
+        tanggalPesanPeminjamanField.setEnabled(true);
+        lamaPeminjamanField.setText("");
+        lamaPeminjamanField.setEnabled(true);
+        biayaPeminjamanField.setText("");
+        totalPeminjamanField.setText("");
+        tanggalKembaliPeminjamanField.setText("");
+        simpanPeminjamanButton.setEnabled(false);
+        batalPeminjamanButton.setEnabled(false);
+    }
+    
     private void showTransaksi(){
         int baris = 0;
         try {
@@ -1095,8 +1201,8 @@ public class Rental extends javax.swing.JFrame {
                 transaksiTable.setValueAt(rs.getString("transaksi_id"), baris, 0);
                 transaksiTable.setValueAt(rs.getString("pelanggan_id"), baris, 1);
                 transaksiTable.setValueAt(rs.getString("kendaraan_id"), baris, 2);
-                transaksiTable.setValueAt(rs.getString("tanggal_masuk"), baris, 3);
-                transaksiTable.setValueAt(rs.getString("tanggal_kembali"), baris, 4);
+                transaksiTable.setValueAt(rs.getDate("tanggal_pesan"), baris, 3);
+                transaksiTable.setValueAt(rs.getDate("tanggal_kembali"), baris, 4);
                 transaksiTable.setValueAt(rs.getString("lama_pinjam"), baris, 5);
                 transaksiTable.setValueAt(rs.getString("total"), baris, 6);
                 baris++;
@@ -1164,6 +1270,7 @@ public class Rental extends javax.swing.JFrame {
     private javax.swing.JPanel homePanel;
     private javax.swing.JTextField idPelangganPeminjamanField;
     private javax.swing.JLabel idPelangganPeminjamanLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
