@@ -53,15 +53,33 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="322" max="32767" attributes="0"/>
+                      <Component id="keluarButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="522" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="442" max="32767" attributes="0"/>
+                      <Component id="keluarButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="keluarButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Keluar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keluarButtonActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="dataPelangganPanel">
           <Events>
@@ -121,7 +139,7 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="15" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -162,6 +180,8 @@
                                   <Component id="baruPelangganButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="simpanPelangganButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="hapusPelangganButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="batalPelangganButton" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -181,18 +201,16 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="ubahPelangganButton" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="hapusPelangganButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="pilihPelangganButton" alignment="0" max="32767" attributes="0"/>
                                       <Component id="cariPelangganButton" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="hapusPelangganField" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="cariPelangganField" min="-2" pref="270" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="ubahPelangganField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="pilihPelangganField" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -223,21 +241,17 @@
                               <Component id="simpanPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="baruPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="batalPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hapusPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="ubahPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="ubahPelangganField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" pref="30" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cariPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cariPelangganField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="pilihPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="pilihPelangganField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="hapusPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="hapusPelangganField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cariPelangganButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cariPelangganField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -257,13 +271,12 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="hapusPelangganButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Hapus (ID)"/>
+                    <Property name="text" type="java.lang.String" value="Hapus"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapusPelangganButtonActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JTextField" name="hapusPelangganField">
                 </Component>
                 <Component class="javax.swing.JLabel" name="namaPelangganLabel">
                   <Properties>
@@ -325,15 +338,15 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="batalPelangganButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="ubahPelangganButton">
+                <Component class="javax.swing.JButton" name="pilihPelangganButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ubah (ID)"/>
+                    <Property name="text" type="java.lang.String" value="Pilih (ID)"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ubahPelangganButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pilihPelangganButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="ubahPelangganField">
+                <Component class="javax.swing.JTextField" name="pilihPelangganField">
                 </Component>
               </SubComponents>
             </Container>
