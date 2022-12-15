@@ -92,6 +92,9 @@ public class Rental extends javax.swing.JFrame {
         tanggalKembaliPeminjamanField = new javax.swing.JFormattedTextField();
         simpanPeminjamanButton = new javax.swing.JButton();
         batalPeminjamanButton = new javax.swing.JButton();
+        transaksiPanel = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        transaksiTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -474,7 +477,7 @@ public class Rental extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Data Kendaraan", dataKendaraanPanel);
@@ -625,10 +628,48 @@ public class Rental extends javax.swing.JFrame {
             .addGroup(peminjamanPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Peminjaman", peminjamanPanel);
+
+        transaksiPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                transaksiPanelComponentShown(evt);
+            }
+        });
+
+        transaksiTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Pelanggan", "Kendaraan", "Tanggal Pesan", "Tanggal Kembali", "Lama Pinjam", "Total"
+            }
+        ));
+        jScrollPane4.setViewportView(transaksiTable);
+
+        javax.swing.GroupLayout transaksiPanelLayout = new javax.swing.GroupLayout(transaksiPanel);
+        transaksiPanel.setLayout(transaksiPanelLayout);
+        transaksiPanelLayout.setHorizontalGroup(
+            transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        transaksiPanelLayout.setVerticalGroup(
+            transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Transaksi", transaksiPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -940,20 +981,17 @@ public class Rental extends javax.swing.JFrame {
             rs.close();
             
             SimpleDateFormat formatWaktu = new SimpleDateFormat("yyyy-MM-DD");
-            String pesan = tanggalPesanPeminjamanField.getText();
-            String kembali = tanggalKembaliPeminjamanField.getText();
-
-            // Parse the date strings using the SimpleDateFormat object
-            Date tanggalPesan = formatWaktu.parse(pesan);
-            Date tanggalKembali = formatWaktu.parse(kembali);
-
-            // Format the parsed dates using the SimpleDateFormat object
-            String pesanFormatted = formatWaktu.format(tanggalPesan);
-            String kembaliFormatted = formatWaktu.format(tanggalKembali);
-
+            Calendar cal = Calendar.getInstance();
+            try {
+                cal.setTime(formatWaktu.parse(tanggalKembaliPeminjamanField.getText()));
+                String output = formatWaktu.format(cal.getTime());
+                tanggalKembaliPeminjamanField.setText(output);
+            } catch (ParseException e){}
+            String kembaliFormatted = tanggalKembaliPeminjamanField.getText();
+            String[] kembaliSplit = kembaliFormatted.split("/");
+            kembaliFormatted = kembaliSplit[2]+"-"+kembaliSplit[1]+"-"+kembaliSplit[0];
             String query = "INSERT INTO transaksi (pelanggan_id, kendaraan_id, tanggal_pesan, tanggal_kembali, lama_pinjam, total) "
-                    + "VALUES ('"+idPelangganPeminjamanField.getText()+"','"+kendaraan_id+"','"+pesanFormatted
-                    + "','"+kembaliFormatted+"','"+lamaPeminjamanField.getText()+"','"+totalPeminjamanField.getText()+"')";
+                    + "VALUES ('"+idPelangganPeminjamanField.getText()+"','"+kendaraan_id+"','"+ tanggalPesanPeminjamanField.getText()+"','"+kembaliFormatted+"','"+lamaPeminjamanField.getText()+"','"+totalPeminjamanField.getText()+"')";
             conn.query(query);
         } catch (Exception e){
             javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
@@ -963,6 +1001,10 @@ public class Rental extends javax.swing.JFrame {
     private void dataKendaraanPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dataKendaraanPanelComponentShown
         showKendaraan();
     }//GEN-LAST:event_dataKendaraanPanelComponentShown
+
+    private void transaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_transaksiPanelComponentShown
+        showTransaksi();
+    }//GEN-LAST:event_transaksiPanelComponentShown
    
     private boolean cekPelanggan(String id){
         try {
@@ -1032,10 +1074,31 @@ public class Rental extends javax.swing.JFrame {
             rs = conn.getData("SELECT * FROM kendaraan");
 
             while (rs.next()){
-                pelangganTable.setValueAt(rs.getString("kendaraan_id"), baris, 0);
-                pelangganTable.setValueAt(rs.getString("jenis"), baris, 1);
-                pelangganTable.setValueAt(rs.getString("sewa"), baris, 2);
-                pelangganTable.setValueAt(rs.getString("stok"), baris, 3);
+                kendaraanTable.setValueAt(rs.getString("kendaraan_id"), baris, 0);
+                kendaraanTable.setValueAt(rs.getString("jenis"), baris, 1);
+                kendaraanTable.setValueAt(rs.getString("harga"), baris, 2);
+                kendaraanTable.setValueAt(rs.getString("stok"), baris, 3);
+                baris++;
+            }
+            rs.close();
+        } catch (SQLException e){}
+    }
+    
+    private void showTransaksi(){
+        int baris = 0;
+        try {
+            Koneksi conn = new Koneksi();
+            ResultSet rs = null;
+            rs = conn.getData("SELECT * FROM transaksi");
+
+            while (rs.next()){
+                transaksiTable.setValueAt(rs.getString("transaksi_id"), baris, 0);
+                transaksiTable.setValueAt(rs.getString("pelanggan_id"), baris, 1);
+                transaksiTable.setValueAt(rs.getString("kendaraan_id"), baris, 2);
+                transaksiTable.setValueAt(rs.getString("tanggal_masuk"), baris, 3);
+                transaksiTable.setValueAt(rs.getString("tanggal_kembali"), baris, 4);
+                transaksiTable.setValueAt(rs.getString("lama_pinjam"), baris, 5);
+                transaksiTable.setValueAt(rs.getString("total"), baris, 6);
                 baris++;
             }
             rs.close();
@@ -1107,6 +1170,7 @@ public class Rental extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jenisField;
@@ -1138,5 +1202,7 @@ public class Rental extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tanggalPesanPeminjamanField;
     private javax.swing.JTextField totalPeminjamanField;
     private javax.swing.JLabel totalPeminjamanLabel;
+    private javax.swing.JPanel transaksiPanel;
+    private javax.swing.JTable transaksiTable;
     // End of variables declaration//GEN-END:variables
 }
