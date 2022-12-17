@@ -1092,6 +1092,7 @@ public class Rental extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void dataPelangganPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dataPelangganPanelComponentShown
+        refreshPelanggan();
         showPelanggan();
     }//GEN-LAST:event_dataPelangganPanelComponentShown
 
@@ -1430,10 +1431,12 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanPeminjamanButtonActionPerformed
 
     private void dataKendaraanPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dataKendaraanPanelComponentShown
+        refreshKendaraan();
         showKendaraan();
     }//GEN-LAST:event_dataKendaraanPanelComponentShown
 
     private void transaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_transaksiPanelComponentShown
+        refreshTransaksi();
         showTransaksi();
     }//GEN-LAST:event_transaksiPanelComponentShown
 
@@ -1519,6 +1522,7 @@ public class Rental extends javax.swing.JFrame {
     }//GEN-LAST:event_pilihPegawaiButtonActionPerformed
 
     private void dataPegawaiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dataPegawaiPanelComponentShown
+        refreshPegawai();
         showPegawai();
     }//GEN-LAST:event_dataPegawaiPanelComponentShown
 
@@ -1693,12 +1697,20 @@ public class Rental extends javax.swing.JFrame {
         batalPeminjamanButton.setEnabled(false);
     }
     
+    private void refreshTransaksi(){
+        for (int i=0; i<25; i++){
+            for (int j=0; j<4; j++){
+                transaksiTable.setValueAt("", i, j);
+            }
+        }
+    }
+    
     private void showTransaksi(){
         int baris = 0;
         try {
             Koneksi conn = new Koneksi();
             ResultSet rs = null;
-            rs = conn.getData("SELECT * FROM transaksi NATURAL JOIN pelanggan NATURAL JOIN kendaraan NATURAL JOIN pegawai");
+            rs = conn.getData("SELECT * FROM transaksi NATURAL JOIN pelanggan NATURAL JOIN kendaraan NATURAL JOIN pegawai ORDER BY transaksi_id");
 
             while (rs.next()){
                 transaksiTable.setValueAt(rs.getString("transaksi_id"), baris, 0);
