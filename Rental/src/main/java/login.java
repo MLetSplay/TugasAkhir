@@ -32,8 +32,8 @@ public class Login extends javax.swing.JFrame {
         judulLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
+        passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,12 +45,6 @@ public class Login extends javax.swing.JFrame {
 
         passwordLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         passwordLabel.setText("Password   :");
-
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +59,7 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(judulLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(judulLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(102, 102, 102)
@@ -108,16 +102,19 @@ public class Login extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Username dan Password tidak boleh kosong");
         } else if (usernameField.getText().equals("")) {
             javax.swing.JOptionPane.showMessageDialog(null, "Username tidak boleh kosong");
-        } else if (passwordField.getText().equals("")) {
+        } else if (passwordField.getPassword().equals("")) {
             javax.swing.JOptionPane.showMessageDialog(null, "Password tidak boleh kosong");
         } else {
             Koneksi kon = new Koneksi();
             ResultSet rs = null;
             try {
-                rs = kon.getData("SELECT * FROM login WHERE username = '" + usernameField.getText() + "' AND password = '" + passwordField.getText() + "'");
+                rs = kon.getData("SELECT * FROM pegawai WHERE username = '" + usernameField.getText() + "' AND password = '" + String.valueOf(passwordField.getPassword()) + "'");
                 if (rs.next()) {
                     javax.swing.JOptionPane.showMessageDialog(null, "Berhasil Login");
                     Rental rt = new Rental();
+                    rt.setUsername(rs.getString("username"));
+                    rt.setKode(rs.getInt("kode"));
+                    rt.checkPrivilege();
                     rt.setVisible(true);
                     this.dispose();
                     usernameField.setEnabled(false);
@@ -132,10 +129,6 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2222,7 +2215,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel judulLabel;
     private javax.swing.JButton loginButton;
-    private javax.swing.JTextField passwordField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;

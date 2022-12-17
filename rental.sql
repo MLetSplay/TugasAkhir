@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2022 at 06:01 AM
+-- Generation Time: Dec 17, 2022 at 04:16 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -40,26 +40,30 @@ CREATE TABLE `kendaraan` (
 
 INSERT INTO `kendaraan` (`kendaraan_id`, `jenis`, `harga`, `stok`) VALUES
 (1, 'Sedan', '200000', 10),
-(2, 'Motor', '20000', 1);
+(2, 'Motor', '20000', 5),
+(3, 'Velociraptor', '40000', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
+-- Table structure for table `pegawai`
 --
 
-CREATE TABLE `login` (
-  `userId` int(11) NOT NULL,
+CREATE TABLE `pegawai` (
+  `user_id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `kode` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `login`
+-- Dumping data for table `pegawai`
 --
 
-INSERT INTO `login` (`userId`, `username`, `password`) VALUES
-(1, 'rizr09', 'rizr09');
+INSERT INTO `pegawai` (`user_id`, `username`, `password`, `kode`) VALUES
+(1, 'rizr09', 'rizr09', 0),
+(2, 'hudzaifahmutaz', 'rahasia', 0),
+(3, 'admin', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +83,7 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `alamat`, `cp`) VALUES
-(1, 'John Doe', '221 B Baker St.', '081246734759'),
+(1, 'John Doe', '221 B Baker St.', '087834567890'),
 (2, 'John Smith', 'Jl. Selamat', '082188233433');
 
 -- --------------------------------------------------------
@@ -92,11 +96,19 @@ CREATE TABLE `transaksi` (
   `transaksi_id` int(11) NOT NULL,
   `pelanggan_id` int(11) NOT NULL,
   `kendaraan_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `tanggal_pesan` date NOT NULL,
   `tanggal_kembali` date NOT NULL,
   `lama_pinjam` int(11) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`transaksi_id`, `pelanggan_id`, `kendaraan_id`, `user_id`, `tanggal_pesan`, `tanggal_kembali`, `lama_pinjam`, `total`) VALUES
+(1, 2, 3, 1, '2022-12-17', '2022-12-18', 1, 40000);
 
 --
 -- Indexes for dumped tables
@@ -109,10 +121,10 @@ ALTER TABLE `kendaraan`
   ADD PRIMARY KEY (`kendaraan_id`);
 
 --
--- Indexes for table `login`
+-- Indexes for table `pegawai`
 --
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`userId`);
+ALTER TABLE `pegawai`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `pelanggan`
@@ -124,7 +136,10 @@ ALTER TABLE `pelanggan`
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`transaksi_id`);
+  ADD PRIMARY KEY (`transaksi_id`),
+  ADD KEY `FK_transaksi_pelanggan` (`pelanggan_id`),
+  ADD KEY `FK_transaksi_kendaraan` (`kendaraan_id`),
+  ADD KEY `FK_transaksi_pegawai` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -134,25 +149,37 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `kendaraan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kendaraan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `login`
+-- AUTO_INCREMENT for table `pegawai`
 --
-ALTER TABLE `login`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `pegawai`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
   MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD CONSTRAINT `FK_transaksi_kendaraan` FOREIGN KEY (`kendaraan_id`) REFERENCES `kendaraan` (`kendaraan_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_transaksi_pegawai` FOREIGN KEY (`user_id`) REFERENCES `pegawai` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_transaksi_pelanggan` FOREIGN KEY (`pelanggan_id`) REFERENCES `pelanggan` (`pelanggan_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
